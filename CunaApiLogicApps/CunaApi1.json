@@ -69,7 +69,25 @@
             "Response": {
               "type": "Response",
               "inputs": {
-                "statusCode": 200
+                "statusCode": 200,
+                "body": "@variables('NewRequestId')"
+              },
+              "runAfter": {
+                "Initialize_variable": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Initialize_variable": {
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "NewRequestId",
+                    "type": "string",
+                    "value": "@{guid()}"
+                  }
+                ]
               },
               "runAfter": {}
             }
