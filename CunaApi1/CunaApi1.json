@@ -123,7 +123,10 @@
                 "method": "post",
                 "body": {
                   "id": "@{variables('NewRequestId')}",
-                  "body": "@{triggerBody()?['body']}"
+                  "body": "@{triggerBody()?['body']}",
+                  "status": "CREATED",
+                  "detail": "Newly createdfrom the initial API request",
+                  "createdTimestamp": "@{variables('creationTimestamp')}"
                 },
                 "headers": {
                   "x-ms-documentdb-raw-partitionkey": "\"@{variables('NewRequestId')}\""
@@ -131,7 +134,7 @@
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
               },
               "runAfter": {
-                "get_a_new_id_for_this_request": [
+                "Initialize_variable": [
                   "Succeeded"
                 ]
               }
@@ -151,6 +154,65 @@
               },
               "runAfter": {
                 "Save_the_new_request": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Create_or_update_document": {
+              "type": "ApiConnection",
+              "inputs": {
+                "host": {
+                  "connection": {
+                    "name": "@parameters('$connections')['documentdb']['connectionId']"
+                  }
+                },
+                "method": "post",
+                "body": {
+                  "id": "@{variables('newrequestid')}",
+                  "body": "@{triggerBody()?['body']}",
+                  "detail": "An error occurred calling the third party API",
+                  "status": "ERROR",
+                  "createdTimestamp": "@{variables('creationTimestamp')}",
+                  "modifiedTimestamp": "@utcnow()"
+                },
+                "headers": {
+                  "x-ms-documentdb-raw-partitionkey": "\"@{variables('NewRequestId')}\"",
+                  "x-ms-documentdb-is-upsert": true
+                },
+                "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
+              },
+              "runAfter": {
+                "Call_a_third_party_service,_sending_the_callback_id": [
+                  "Failed"
+                ]
+              }
+            },
+            "Response": {
+              "type": "Response",
+              "kind": "http",
+              "inputs": {
+                "statusCode": "@outputs('Call_a_third_party_service,_sending_the_callback_id')['statusCode']",
+                "body": "Error calling third party service"
+              },
+              "runAfter": {
+                "Create_or_update_document": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Initialize_variable": {
+              "type": "InitializeVariable",
+              "inputs": {
+                "variables": [
+                  {
+                    "name": "creationTimestamp",
+                    "type": "string",
+                    "value": "@{utcnow()}"
+                  }
+                ]
+              },
+              "runAfter": {
+                "get_a_new_id_for_this_request": [
                   "Succeeded"
                 ]
               }
