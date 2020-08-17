@@ -87,19 +87,19 @@
         "definition": {
           "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
           "actions": {
-            "Response": {
+            "Respond_with_the_new_request_id": {
               "type": "Response",
               "inputs": {
                 "statusCode": 200,
                 "body": "@variables('NewRequestId')"
               },
               "runAfter": {
-                "Create_or_update_document": [
+                "Call_a_third_party_service,_sending_the_callback_id": [
                   "Succeeded"
                 ]
               }
             },
-            "Initialize_variable": {
+            "get_a_new_id_for_this_request": {
               "type": "InitializeVariable",
               "inputs": {
                 "variables": [
@@ -112,7 +112,7 @@
               },
               "runAfter": {}
             },
-            "Create_or_update_document": {
+            "Save_the_new_request": {
               "type": "ApiConnection",
               "inputs": {
                 "host": {
@@ -131,7 +131,26 @@
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
               },
               "runAfter": {
-                "Initialize_variable": [
+                "get_a_new_id_for_this_request": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Call_a_third_party_service,_sending_the_callback_id": {
+              "type": "Http",
+              "inputs": {
+                "method": "POST",
+                "uri": "https://jsonplaceholder.typicode.com/posts",
+                "headers": {
+                  "Content-Type": "application/json"
+                },
+                "body": {
+                  "body": "@{triggerBody()?['body']}",
+                  "callback": "/callback/@{variables('newrequestid')}"
+                }
+              },
+              "runAfter": {
+                "Save_the_new_request": [
                   "Succeeded"
                 ]
               }
