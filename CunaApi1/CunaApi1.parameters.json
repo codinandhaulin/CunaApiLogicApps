@@ -4,6 +4,9 @@
   "parameters": {
     "logicAppName": {
       "value": "CUNABackendAPI1"
+    },
+    "documentdb_1_accessKey": {
+      "value": "vldpX37FSEb1YEVdiCegVXARW8hUdc7ZX6Y2qUYTXzX3DgpFGrihBmuVl0ICsarmDJSLYX8I86QYHcbQdDNmDA=="
     }
   }
 }
