@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "CunaApiLogicApps", "CunaApiLogicApps\CunaApi1.deployproj", "{8A4F4E1C-41E4-41B1-8259-BA26F5C330C9}"
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "CunaApiLogicApps", "CunaApi1\CunaApi1.deployproj", "{8A4F4E1C-41E4-41B1-8259-BA26F5C330C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
