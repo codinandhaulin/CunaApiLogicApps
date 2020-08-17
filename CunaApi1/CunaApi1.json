@@ -99,7 +99,7 @@
                 ]
               }
             },
-            "get_a_new_id_for_this_request": {
+            "Generate_a_new_id_for_this_request": {
               "type": "InitializeVariable",
               "inputs": {
                 "variables": [
@@ -134,7 +134,7 @@
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
               },
               "runAfter": {
-                "Initialize_variable": [
+                "Capture_current_timestamp": [
                   "Succeeded"
                 ]
               }
@@ -200,7 +200,7 @@
                 ]
               }
             },
-            "Initialize_variable": {
+            "Capture_current_timestamp": {
               "type": "InitializeVariable",
               "inputs": {
                 "variables": [
@@ -212,7 +212,7 @@
                 ]
               },
               "runAfter": {
-                "get_a_new_id_for_this_request": [
+                "Generate_a_new_id_for_this_request": [
                   "Succeeded"
                 ]
               }
