@@ -87,7 +87,7 @@
         "definition": {
           "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
           "actions": {
-            "Response": {
+            "Respond_with_status_code_204": {
               "type": "Response",
               "inputs": {
                 "statusCode": 204,
@@ -97,12 +97,12 @@
                 "body": "@triggerBody()"
               },
               "runAfter": {
-                "Create_or_update_document_2": [
+                "Update_the_request_with_Status_and_Detail": [
                   "Succeeded"
                 ]
               }
             },
-            "Get_a_document": {
+            "Retrieve_the_request_item": {
               "type": "ApiConnection",
               "inputs": {
                 "host": {
@@ -119,10 +119,10 @@
               },
               "runAfter": {}
             },
-            "Parse_JSON_2": {
+            "Parse_the_request_item": {
               "type": "ParseJson",
               "inputs": {
-                "content": "@body('Get_a_document')",
+                "content": "@body('Retrieve_the_request_item')",
                 "schema": {
                   "type": "object",
                   "properties": {
@@ -145,12 +145,12 @@
                 }
               },
               "runAfter": {
-                "Get_a_document": [
+                "Retrieve_the_request_item": [
                   "Succeeded"
                 ]
               }
             },
-            "Create_or_update_document_2": {
+            "Update_the_request_with_Status_and_Detail": {
               "type": "ApiConnection",
               "inputs": {
                 "host": {
@@ -161,11 +161,11 @@
                 "method": "post",
                 "body": {
                   "id": "@{triggerOutputs()['relativePathParameters']['id']}",
-                  "body": "@{body('Parse_JSON_2')?['body']}",
+                  "body": "@{body('Parse_the_request_item')?['body']}",
                   "detail": "Third party API has started processing the document",
-                  "createdTimestamp": "@{body('Parse_JSON_2')?['createdTimestamp']}",
-                  "modifiedTimestamp": "@{utcNow()}",
-                  "status": "@{triggerBody()}"
+                  "status": "@{triggerBody()}",
+                  "createdTimestamp": "@{body('Parse_the_request_item')?['createdTimestamp']}",
+                  "modifiedTimestamp": "@{utcNow()}"
                 },
                 "headers": {
                   "x-ms-documentdb-raw-partitionkey": "\"@{triggerOutputs()['relativePathParameters']['id']}\"",
@@ -174,7 +174,7 @@
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
               },
               "runAfter": {
-                "Parse_JSON_2": [
+                "Parse_the_request_item": [
                   "Succeeded"
                 ]
               }
