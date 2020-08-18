@@ -91,7 +91,7 @@
               "type": "Response",
               "inputs": {
                 "statusCode": 200,
-                "body": "@variables('NewRequestId')"
+                "body": "@variables('newRequestId')"
               },
               "runAfter": {
                 "Call_a_third_party_service,_sending_the_callback_id": [
@@ -104,7 +104,7 @@
               "inputs": {
                 "variables": [
                   {
-                    "name": "NewRequestId",
+                    "name": "newRequestId",
                     "type": "string",
                     "value": "@{guid()}"
                   }
@@ -122,14 +122,14 @@
                 },
                 "method": "post",
                 "body": {
-                  "id": "@{variables('NewRequestId')}",
+                  "id": "@{variables('newRequestId')}",
                   "body": "@{triggerBody()?['body']}",
                   "status": "CREATED",
-                  "detail": "Newly createdfrom the initial API request",
+                  "detail": "Newly created from the initial API 1 request",
                   "createdTimestamp": "@{variables('creationTimestamp')}"
                 },
                 "headers": {
-                  "x-ms-documentdb-raw-partitionkey": "\"@{variables('NewRequestId')}\""
+                  "x-ms-documentdb-raw-partitionkey": "\"@{variables('newRequestId')}\""
                 },
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
               },
@@ -143,7 +143,7 @@
               "type": "Http",
               "inputs": {
                 "method": "POST",
-                "uri": "https://jsonplaceholder.typicode.com/posts",
+                "uri": "http://example.com/request",
                 "headers": {
                   "Content-Type": "application/json"
                 },
@@ -176,7 +176,7 @@
                   "modifiedTimestamp": "@utcnow()"
                 },
                 "headers": {
-                  "x-ms-documentdb-raw-partitionkey": "\"@{variables('NewRequestId')}\"",
+                  "x-ms-documentdb-raw-partitionkey": "\"@{variables('newRequestId')}\"",
                   "x-ms-documentdb-is-upsert": true
                 },
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
@@ -187,7 +187,7 @@
                 ]
               }
             },
-            "Response": {
+            "Respond_with_the_error_status_code": {
               "type": "Response",
               "kind": "http",
               "inputs": {
