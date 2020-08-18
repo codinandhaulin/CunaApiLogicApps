@@ -87,19 +87,25 @@
         "definition": {
           "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
           "actions": {
-            "Response": {
+            "Respond_with_status_code_200": {
               "type": "Response",
               "inputs": {
                 "statusCode": 200,
-                "body": "{\n'detail\": @{body('Parse_JSON')?['detail']},\n\"body\": @{body('Parse_JSON')?['body']},\n\"status\": @{body('Parse_JSON')?['status']},\n\"createdTimestamp\": @{body('Parse_JSON')?['createdTimestamp']},\n\"modifiedTimestamp\": @{body('Parse_JSON')?['modifiedTimestamp']}}"
+                "body": {
+                  "detail": "@body('Parse_the_request_item')?['detail']",
+                  "body": "@body('Parse_the_request_item')?['body']",
+                  "status": "@body('Parse_the_request_item')?['status']",
+                  "createdTimestamp": "@body('Parse_the_request_item')?['createdTimestamp']",
+                  "modifiedTimestamp": "@body('Parse_the_request_item')?['modifiedTimestamp']"
+                }
               },
               "runAfter": {
-                "Parse_JSON": [
+                "Parse_the_request_item": [
                   "Succeeded"
                 ]
               }
             },
-            "Get_a_document": {
+            "Retrieve_the_request_item": {
               "type": "ApiConnection",
               "inputs": {
                 "host": {
@@ -116,10 +122,10 @@
               },
               "runAfter": {}
             },
-            "Parse_JSON": {
+            "Parse_the_request_item": {
               "type": "ParseJson",
               "inputs": {
-                "content": "@body('Get_a_document')",
+                "content": "@body('Retrieve_the_request_item')",
                 "schema": {
                   "type": "object",
                   "properties": {
@@ -145,7 +151,7 @@
                 }
               },
               "runAfter": {
-                "Get_a_document": [
+                "Retrieve_the_request_item": [
                   "Succeeded"
                 ]
               }
