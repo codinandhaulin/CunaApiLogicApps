@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "be419154-8452-49be-8372-91f544f1eaeb",
+		"name": "CUNA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CUNA API 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d93a7470-0d00-43f4-82e3-fe080fbae55c",
+						"exec": [
+							"// set the environment variable \"id\" which can be used in subsequent CUNA API calls\r",
+							"pm.environment.set(\"id\", responseBody );"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\": \"Document requested at 05:02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://prod-24.northcentralus.logic.azure.com:443/workflows/e89d06ca5570447b99c7fa7aec819cdd/triggers/request/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=1C2BCgNdCFj0EMoeO0zR7MvM1YGdkBYDMuel99563oA",
+					"protocol": "https",
+					"host": [
+						"prod-24",
+						"northcentralus",
+						"logic",
+						"azure",
+						"com"
+					],
+					"port": "443",
+					"path": [
+						"workflows",
+						"e89d06ca5570447b99c7fa7aec819cdd",
+						"triggers",
+						"request",
+						"paths",
+						"invoke"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2016-10-01"
+						},
+						{
+							"key": "sp",
+							"value": "%2Ftriggers%2Frequest%2Frun"
+						},
+						{
+							"key": "sv",
+							"value": "1.0"
+						},
+						{
+							"key": "sig",
+							"value": "1C2BCgNdCFj0EMoeO0zR7MvM1YGdkBYDMuel99563oA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CUNA API 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "STARTED",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://prod-21.northcentralus.logic.azure.com/workflows/9c629c2389bd4a15867b838227e1fc29/triggers/request/paths/invoke/callback/{{id}}?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=Vl6k5MrOeaz51ePxA-7gLSIPiTtMpKE9UVT0jLArWY0",
+					"protocol": "https",
+					"host": [
+						"prod-21",
+						"northcentralus",
+						"logic",
+						"azure",
+						"com"
+					],
+					"path": [
+						"workflows",
+						"9c629c2389bd4a15867b838227e1fc29",
+						"triggers",
+						"request",
+						"paths",
+						"invoke",
+						"callback",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2016-10-01"
+						},
+						{
+							"key": "sp",
+							"value": "%2Ftriggers%2Frequest%2Frun"
+						},
+						{
+							"key": "sv",
+							"value": "1.0"
+						},
+						{
+							"key": "sig",
+							"value": "Vl6k5MrOeaz51ePxA-7gLSIPiTtMpKE9UVT0jLArWY0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CUNA API 3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"COMPLETED\",\r\n    \"detail\": \"The document has been fully processed and is ready.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://prod-02.northcentralus.logic.azure.com/workflows/1857c56326854f83a19932b034ec7429/triggers/request/paths/invoke/callback/{{id}}?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=25ts5mKdgoq8sTi6cJt23Wjv4RkpybBuRTfN84DeqtQ",
+					"protocol": "https",
+					"host": [
+						"prod-02",
+						"northcentralus",
+						"logic",
+						"azure",
+						"com"
+					],
+					"path": [
+						"workflows",
+						"1857c56326854f83a19932b034ec7429",
+						"triggers",
+						"request",
+						"paths",
+						"invoke",
+						"callback",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2016-10-01"
+						},
+						{
+							"key": "sp",
+							"value": "%2Ftriggers%2Frequest%2Frun"
+						},
+						{
+							"key": "sv",
+							"value": "1.0"
+						},
+						{
+							"key": "sig",
+							"value": "25ts5mKdgoq8sTi6cJt23Wjv4RkpybBuRTfN84DeqtQ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CUNA API 4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://prod-31.northcentralus.logic.azure.com/workflows/943c80a3044b404bbf07b29ee08b48a4/triggers/request/paths/invoke/status/{{id}}?api-version=2016-10-01&sp=%2Ftriggers%2Frequest%2Frun&sv=1.0&sig=H41a7zMuGLouXqnpBn6T7EfgHd_pXM_2ZTJg3Th-AzM",
+					"protocol": "https",
+					"host": [
+						"prod-31",
+						"northcentralus",
+						"logic",
+						"azure",
+						"com"
+					],
+					"path": [
+						"workflows",
+						"943c80a3044b404bbf07b29ee08b48a4",
+						"triggers",
+						"request",
+						"paths",
+						"invoke",
+						"status",
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2016-10-01"
+						},
+						{
+							"key": "sp",
+							"value": "%2Ftriggers%2Frequest%2Frun"
+						},
+						{
+							"key": "sv",
+							"value": "1.0"
+						},
+						{
+							"key": "sig",
+							"value": "H41a7zMuGLouXqnpBn6T7EfgHd_pXM_2ZTJg3Th-AzM"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
