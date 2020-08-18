@@ -7,6 +7,8 @@ Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "CunaApi1", "CunaApi1\CunaAp
 EndProject
 Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "CunaApi2", "CunaApi2\CunaApi2.deployproj", "{20EA7F54-C499-4DA3-A9B3-197454D80C31}"
 EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "CunaApi3", "CunaApi3\CunaApi3.deployproj", "{F0F14AB7-CC3C-43D7-8D14-449E631EA3D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{20EA7F54-C499-4DA3-A9B3-197454D80C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20EA7F54-C499-4DA3-A9B3-197454D80C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20EA7F54-C499-4DA3-A9B3-197454D80C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F14AB7-CC3C-43D7-8D14-449E631EA3D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F14AB7-CC3C-43D7-8D14-449E631EA3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F14AB7-CC3C-43D7-8D14-449E631EA3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F14AB7-CC3C-43D7-8D14-449E631EA3D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
