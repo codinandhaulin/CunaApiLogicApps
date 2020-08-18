@@ -87,22 +87,18 @@
         "definition": {
           "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
           "actions": {
-            "Response": {
+            "Respond_with_status_code_204": {
               "type": "Response",
               "inputs": {
-                "statusCode": 204,
-                "headers": {
-                  "i@{triggerOutputs()['relativePathParameters']['id']}d": ""
-                },
-                "body": "@triggerBody()"
+                "statusCode": 204
               },
               "runAfter": {
-                "Create_or_update_document": [
+                "Update_the_request_with_Status_and_Detail": [
                   "Succeeded"
                 ]
               }
             },
-            "Get_a_document": {
+            "Retrieve_the_request_item": {
               "type": "ApiConnection",
               "inputs": {
                 "host": {
@@ -119,10 +115,10 @@
               },
               "runAfter": {}
             },
-            "Parse_JSON": {
+            "Parse_the_request_item": {
               "type": "ParseJson",
               "inputs": {
-                "content": "@body('Get_a_document')",
+                "content": "@body('Retrieve_the_request_item')",
                 "schema": {
                   "properties": {
                     "body": {
@@ -145,12 +141,12 @@
                 }
               },
               "runAfter": {
-                "Get_a_document": [
+                "Retrieve_the_request_item": [
                   "Succeeded"
                 ]
               }
             },
-            "Create_or_update_document": {
+            "Update_the_request_with_Status_and_Detail": {
               "type": "ApiConnection",
               "inputs": {
                 "host": {
@@ -160,8 +156,8 @@
                 },
                 "method": "post",
                 "body": {
-                  "body": "@{body('Parse_JSON')?['body']}",
-                  "createdTimestamp": "@{body('Parse_JSON')?['createdTimestamp']}",
+                  "body": "@{body('Parse_the_request_item')?['body']}",
+                  "createdTimestamp": "@{body('Parse_the_request_item')?['createdTimestamp']}",
                   "detail": "@{triggerBody()?['detail']}",
                   "id": "@{triggerOutputs()['relativePathParameters']['id']}",
                   "modifiedTimestamp": "@{utcNow()}",
@@ -174,7 +170,7 @@
                 "path": "/dbs/@{encodeURIComponent('cunadb1')}/colls/@{encodeURIComponent('cunacontainer')}/docs"
               },
               "runAfter": {
-                "Parse_JSON": [
+                "Parse_the_request_item": [
                   "Succeeded"
                 ]
               }

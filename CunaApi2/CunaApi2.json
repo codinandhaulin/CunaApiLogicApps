@@ -90,11 +90,7 @@
             "Respond_with_status_code_204": {
               "type": "Response",
               "inputs": {
-                "statusCode": 204,
-                "headers": {
-                  "id": "@triggerOutputs()['relativePathParameters']['id']"
-                },
-                "body": "@triggerBody()"
+                "statusCode": 204
               },
               "runAfter": {
                 "Update_the_request_with_Status_and_Detail": [
